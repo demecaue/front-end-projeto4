@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState, type SubmitEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -11,6 +12,7 @@ export function CadastroPage() {
     const navigate = useNavigate();
     const [form, setForm] = useState<Usuario>({ nome: "", email: "", senha: "", confirmarSenha: "", cpf: "" });
     const [erros, setErros] = useState<Erros>({});
+    const [erroApi, setErroApi] = useState("");
 
     function alterar(campo: keyof Usuario) {
         return (valor: string) => setForm({ ...form, [campo]: valor });
@@ -18,6 +20,7 @@ export function CadastroPage() {
 
     async function enviar(event: SubmitEvent) {
         event.preventDefault();
+        setErroApi("");
         const resultado = usuarioSchema.safeParse(form);
 
         if (!resultado.success) {
@@ -27,8 +30,14 @@ export function CadastroPage() {
 
         setErros({});
         const { confirmarSenha, ...usuario } = resultado.data;
-        await api.post("/usuarios", usuario);
-        navigate("/login");
+
+        try {
+            await api.post("/usuarios", usuario);
+            navigate("/login");
+        } catch (erro) {
+            const mensagem = axios.isAxiosError(erro) && erro.response?.data?.mensagem;
+            setErroApi(mensagem || "Não foi possível conectar ao servidor");
+        }
     }
 
     return (
@@ -39,6 +48,7 @@ export function CadastroPage() {
             <Campo rotulo="Senha" tipo="password" valor={form.senha} erro={erros.senha?.[0]} onChange={alterar("senha")} />
             <Campo rotulo="Confirmar senha" tipo="password" valor={form.confirmarSenha} erro={erros.confirmarSenha?.[0]} onChange={alterar("confirmarSenha")} />
             <Campo rotulo="CPF" valor={form.cpf} erro={erros.cpf?.[0]} onChange={alterar("cpf")} />
+            {erroApi && <p className="erro-api" role="alert">{erroApi}</p>}
             <button type="submit">Cadastrar</button>
         </form>
     )

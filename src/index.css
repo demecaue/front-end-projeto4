@@ -43,8 +43,14 @@ body {
   border: 1px solid #9ca3af;
 }
 
-.campo small {
+.campo small,
+.erro-api {
   color: light-dark(#b91c1c, #fca5a5);
+}
+
+.erro-api {
+  margin: 0;
+  font-size: 14px;
 }
 
 .cadastro button {
