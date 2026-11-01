@@ -33,8 +33,10 @@ export function CadastroPage() {
 
         try {
             await api.post("/usuarios", usuario);
+            // Rubrica: redirecionar para o login após o cadastro
             navigate("/login");
         } catch (erro) {
+            // Rubrica: lidar com as mensagens de erro da API
             const mensagem = axios.isAxiosError(erro) && erro.response?.data?.mensagem;
             setErroApi(mensagem || "Não foi possível conectar ao servidor");
         }
