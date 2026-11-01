@@ -1,0 +1,62 @@
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: light-dark(#f3f4f6, #16181d);
+  color: light-dark(#1f2937, #e5e7eb);
+}
+
+.cadastro {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 400px;
+  margin: 48px auto;
+  padding: 24px;
+  border-radius: 8px;
+  background: light-dark(#fff, #22252b);
+}
+
+.cadastro h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+}
+
+.campo input,
+.cadastro button {
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.campo input {
+  border: 1px solid #9ca3af;
+}
+
+.campo small {
+  color: light-dark(#b91c1c, #fca5a5);
+}
+
+.cadastro button {
+  border: 0;
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 448px) {
+  .cadastro {
+    margin: 0;
+    border-radius: 0;
+  }
+}
