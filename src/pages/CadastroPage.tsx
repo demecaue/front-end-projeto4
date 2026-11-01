@@ -1,4 +1,5 @@
 import { useState, type SubmitEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { api } from "../api/axios";
 import { Campo } from "../componentes/Campo";
@@ -7,6 +8,7 @@ import { usuarioSchema, type Usuario } from "../types/usuario";
 type Erros = Partial<Record<keyof Usuario, string[]>>;
 
 export function CadastroPage() {
+    const navigate = useNavigate();
     const [form, setForm] = useState<Usuario>({ nome: "", email: "", senha: "", confirmarSenha: "", cpf: "" });
     const [erros, setErros] = useState<Erros>({});
 
@@ -26,6 +28,7 @@ export function CadastroPage() {
         setErros({});
         const { confirmarSenha, ...usuario } = resultado.data;
         await api.post("/usuarios", usuario);
+        navigate("/login");
     }
 
     return (
