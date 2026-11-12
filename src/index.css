@@ -9,7 +9,7 @@ body {
   color: light-dark(#1f2937, #e5e7eb);
 }
 
-.cadastro {
+.cartao {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -20,9 +20,24 @@ body {
   background: light-dark(#fff, #22252b);
 }
 
-.cadastro h1 {
+.cartao h1 {
   margin: 0;
   font-size: 24px;
+}
+
+.cartao p {
+  margin: 0;
+}
+
+.cartao a {
+  align-self: center;
+  color: light-dark(#2563eb, #93c5fd);
+}
+
+.logo {
+  width: 180px;
+  align-self: center;
+  border-radius: 6px;
 }
 
 .campo {
@@ -33,7 +48,7 @@ body {
 }
 
 .campo input,
-.cadastro button {
+.cartao button {
   padding: 10px;
   border-radius: 6px;
   font-size: 16px;
@@ -49,11 +64,10 @@ body {
 }
 
 .erro-api {
-  margin: 0;
   font-size: 14px;
 }
 
-.cadastro button {
+.cartao button {
   border: 0;
   background: #2563eb;
   color: #fff;
@@ -61,7 +75,7 @@ body {
 }
 
 @media (max-width: 448px) {
-  .cadastro {
+  .cartao {
     margin: 0;
     border-radius: 0;
   }

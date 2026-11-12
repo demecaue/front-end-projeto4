@@ -1,9 +1,10 @@
-import axios from "axios";
 import { useState, type SubmitEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { api } from "../api/axios";
+import { mensagemDeErro } from "../api/erros";
 import { Campo } from "../componentes/Campo";
+import { Logo } from "../componentes/Logo";
 import { usuarioSchema, type Usuario } from "../types/usuario";
 
 type Erros = Partial<Record<keyof Usuario, string[]>>;
@@ -37,13 +38,13 @@ export function CadastroPage() {
             navigate("/login");
         } catch (erro) {
             // Rubrica: lidar com as mensagens de erro da API
-            const mensagem = axios.isAxiosError(erro) && erro.response?.data?.mensagem;
-            setErroApi(mensagem || "Não foi possível conectar ao servidor");
+            setErroApi(mensagemDeErro(erro));
         }
     }
 
     return (
-        <form className="cadastro" onSubmit={enviar} noValidate>
+        <form className="cartao" onSubmit={enviar} noValidate>
+            <Logo />
             <h1>Cadastro</h1>
             <Campo rotulo="Nome" valor={form.nome} erro={erros.nome?.[0]} onChange={alterar("nome")} />
             <Campo rotulo="Email" valor={form.email} erro={erros.email?.[0]} onChange={alterar("email")} />
@@ -52,6 +53,7 @@ export function CadastroPage() {
             <Campo rotulo="CPF" valor={form.cpf} erro={erros.cpf?.[0]} onChange={alterar("cpf")} />
             {erroApi && <p className="erro-api" role="alert">{erroApi}</p>}
             <button type="submit">Cadastrar</button>
+            <Link to="/login">Já tenho conta</Link>
         </form>
     )
 }
