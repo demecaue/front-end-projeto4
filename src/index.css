@@ -55,9 +55,98 @@ body {
 
 .cabecalho nav {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 16px;
   margin-left: auto;
+}
+
+.listagem {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 960px;
+  margin: 32px auto;
+  padding: 0 16px;
+}
+
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.topo h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.botao,
+.listagem button {
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.tabela {
+  overflow-x: auto;
+  border-radius: 8px;
+  background: light-dark(#fff, #22252b);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th,
+td {
+  padding: 10px 12px;
+  border-bottom: 1px solid light-dark(#e5e7eb, #374151);
+  text-align: left;
+}
+
+.acoes {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+}
+
+.acoes a {
+  color: light-dark(#2563eb, #93c5fd);
+}
+
+.listagem .acoes button {
+  background: #b91c1c;
+}
+
+.paginacao {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.paginacao button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.etiqueta {
+  white-space: nowrap;
+}
+
+.alerta {
+  color: light-dark(#b91c1c, #fca5a5);
+  font-weight: 600;
 }
 
 .cabecalho a {
@@ -91,13 +180,15 @@ body {
 }
 
 .campo input,
+.campo select,
 .cartao button {
   padding: 10px;
   border-radius: 6px;
   font-size: 16px;
 }
 
-.campo input {
+.campo input,
+.campo select {
   border: 1px solid #9ca3af;
 }
 

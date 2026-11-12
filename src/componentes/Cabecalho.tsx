@@ -11,6 +11,10 @@ export function Cabecalho() {
             <span>Olá, {usuario?.nome}</span>
             <nav>
                 <Link to="/inicio">Início</Link>
+                <Link to="/categorias">Categorias</Link>
+                <Link to="/materiais">Materiais</Link>
+                <Link to="/clientes">Clientes</Link>
+                <Link to="/obras">Obras</Link>
                 <Link to="/perfil">Meus dados</Link>
                 <button type="button" onClick={sair}>Sair</button>
             </nav>
