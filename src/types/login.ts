@@ -10,6 +10,7 @@ export const loginSchema = z.object({
 export type Login = z.infer<typeof loginSchema>;
 
 export type UsuarioLogado = {
+    id: number;
     nome: string;
     email: string;
 };

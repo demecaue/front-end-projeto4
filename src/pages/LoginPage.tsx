@@ -5,12 +5,14 @@ import { api } from "../api/axios";
 import { mensagemDeErro } from "../api/erros";
 import { Campo } from "../componentes/Campo";
 import { Logo } from "../componentes/Logo";
+import { useUsuario } from "../contexto/UsuarioContexto";
 import { loginSchema, type Login, type RespostaLogin } from "../types/login";
 
 type Erros = Partial<Record<keyof Login, string[]>>;
 
 export function LoginPage() {
     const navigate = useNavigate();
+    const { entrar } = useUsuario();
     const [form, setForm] = useState<Login>({ email: "", senha: "" });
     const [erros, setErros] = useState<Erros>({});
     const [erroApi, setErroApi] = useState("");
@@ -19,7 +21,7 @@ export function LoginPage() {
         return (valor: string) => setForm({ ...form, [campo]: valor });
     }
 
-    async function entrar(event: SubmitEvent) {
+    async function enviar(event: SubmitEvent) {
         event.preventDefault();
         setErroApi("");
         const resultado = loginSchema.safeParse(form);
@@ -33,9 +35,7 @@ export function LoginPage() {
 
         try {
             const { data } = await api.post<RespostaLogin>("/login", resultado.data);
-            // Rubrica: armazenar o token no localStorage
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("usuario", JSON.stringify(data.usuario));
+            entrar(data.token, data.usuario);
             // Rubrica: redirecionar para a área logada
             navigate("/inicio");
         } catch (erro) {
@@ -45,7 +45,7 @@ export function LoginPage() {
     }
 
     return (
-        <form className="cartao" onSubmit={entrar} noValidate>
+        <form className="cartao" onSubmit={enviar} noValidate>
             <Logo />
             <h1>Login</h1>
             {/* Rubrica: campos para email e senha */}

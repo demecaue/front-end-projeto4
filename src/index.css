@@ -40,6 +40,49 @@ body {
   border-radius: 6px;
 }
 
+.cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
+  background: light-dark(#fff, #22252b);
+}
+
+.cabecalho .logo {
+  width: 110px;
+}
+
+.cabecalho nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
+}
+
+.cabecalho a {
+  color: light-dark(#2563eb, #93c5fd);
+}
+
+.cabecalho button {
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+}
+
+.sucesso {
+  color: light-dark(#15803d, #86efac);
+  font-size: 14px;
+}
+
+.campo input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .campo {
   display: flex;
   flex-direction: column;

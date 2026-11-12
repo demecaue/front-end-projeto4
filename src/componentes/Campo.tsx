@@ -3,14 +3,15 @@ type Props = {
     tipo?: string;
     valor: string;
     erro?: string;
-    onChange: (valor: string) => void;
+    desabilitado?: boolean;
+    onChange?: (valor: string) => void;
 }
 
-export function Campo({ rotulo, tipo = "text", valor, erro, onChange }: Props) {
+export function Campo({ rotulo, tipo = "text", valor, erro, desabilitado, onChange }: Props) {
     return (
         <label className="campo">
             {rotulo}
-            <input type={tipo} value={valor} onChange={(event) => onChange(event.target.value)} />
+            <input type={tipo} value={valor} disabled={desabilitado} onChange={(event) => onChange?.(event.target.value)} />
             {erro && <small>{erro}</small>}
         </label>
     )
